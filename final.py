@@ -9,21 +9,16 @@ from time import sleep
 rospy.init_node("flight_test_node")  # инициализируем ноду
 
 coordinates = [ # массив координат точе
-    [2.7,4.6,1.7], #1
-    [0.15,4.4,1.7], #2
-    [0.4,2.3,1.7], #3
-    [0.6,0.1,1.7], #4
-    [2.6,2.3,1.7], #5
-    [2.6,2.3,1.7], #6
-    [2.3,3.4,1.7], #7
-    [1.4,4.4,1.7], #8
-    [0.5,3.55,1.7], #9
-    [0.5,1.2,1.7], #10
-    [1.3,0.4,1.7], #11
-    [0.6,5.2,1.7], #12
-    [0.15,3.6,1.7], #13
-    [0.1,1.3,1.7], #14
-    [1.2,0.5,1.7], #15
+    [1.4,3.5,0.7], #1
+    [1.4,4.4,1.7], #2
+    [0.7,3.55,1.7], #3
+    [0.7,1.2,1.7], #4
+    [1.3,0.6,1.7], #5
+    [1.4,4.8,1.7], #6
+    [0.15,3.6,1.7], #7
+    [0.15,3.6,1.7], #8
+    [1.25,0.15,1.7], #9
+    [2.8,1.4,1.7], #10
     [1.33,1.3,0.93], # пасадка 
 ]
 run = True # переменная отвечающая за работу программы
@@ -36,13 +31,10 @@ def callback(event): # функция обработки событй Автоп
     global position_number
 
     event = event.data
-    if event == CallbackEvent.ENGINES_STARTED: # блок обработки события запуска двигателя
+    if event == CallbackEvent.ENGINES_START ED: # блок обработки события запуска двигателя
         print("engine started")
         ap.takeoff() # отдаем команду взлета
     elif event == CallbackEvent.TAKEOFF_COMPLETE: # блок обработки с обытия завершения взлета
-        moduleLed.changeAllColor(0.0,255.0,0.0)
-        rospy.sleep(1)
-        moduleLed.changeAllColor(0.0,0.0,0.0)
         print("takeoff complite")
         position_number = 0
         ap.goToLocalPoint(coordinates[position_number][0], coordinates[position_number][1], coordinates[position_number][2])
